@@ -102,6 +102,16 @@
     #define DEMO_entryFUNCTION             RunHttpsSyncUploadDemo
 #elif defined( CONFIG_HTTPS_ASYNC_UPLOAD_DEMO_ENABLED )
     #define DEMO_entryFUNCTION             RunHttpsAsyncUploadDemo
+#elif defined( CONFIG_MY_APPLICATION_ENABLED )
+    #define DEMO_entryFUNCTION             RunMyApplication
+	#if defined( democonfigMQTT_ECHO_TASK_STACK_SIZE )
+        #undef democonfigDEMO_STACKSIZE
+        #define democonfigDEMO_STACKSIZE    democonfigMQTT_ECHO_TASK_STACK_SIZE
+    #endif
+    #if defined( democonfigMQTT_ECHO_TASK_PRIORITY )
+        #undef democonfigDEMO_PRIORITY
+        #define democonfigDEMO_PRIORITY     democonfigMQTT_ECHO_TASK_PRIORITY
+    #endif
 #else /* if defined( CONFIG_MQTT_DEMO_ENABLED ) */
 /* if no demo was defined there will be no entry point defined and we will not be able to run the demo */
     #error "No demo to run. One demo should be enabled"

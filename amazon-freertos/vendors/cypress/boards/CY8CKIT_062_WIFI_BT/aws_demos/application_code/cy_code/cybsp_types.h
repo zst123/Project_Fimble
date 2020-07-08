@@ -262,6 +262,87 @@ extern "C" {
 
 /** \} group_bsp_pins */
 
+/** Cypress J2 Header pin 1 */
+#ifndef CYBSP_J2_1
+#define CYBSP_J2_1                  (CYBSP_A0)
+#endif
+/** Cypress J2 Header pin 2 */
+#ifndef CYBSP_J2_2
+#define CYBSP_J2_2                  (P9_0)
+#endif
+/** Cypress J2 Header pin 3 */
+#ifndef CYBSP_J2_3
+#define CYBSP_J2_3                  (CYBSP_A1)
+#endif
+/** Cypress J2 Header pin 4 */
+#ifndef CYBSP_J2_4
+#define CYBSP_J2_4                  (P9_1)
+#endif
+/** Cypress J2 Header pin 5 */
+#ifndef CYBSP_J2_5
+#define CYBSP_J2_5                  (CYBSP_A2)
+#endif
+/** Cypress J2 Header pin 6 */
+#ifndef CYBSP_J2_6
+#define CYBSP_J2_6                  (P9_2)
+#endif
+/** Cypress J2 Header pin 7 */
+#ifndef CYBSP_J2_7
+#define CYBSP_J2_7                  (CYBSP_A3)
+#endif
+/** Cypress J2 Header pin 8 */
+#ifndef CYBSP_J2_8
+#define CYBSP_J2_8                  (P9_3)
+#endif
+/** Cypress J2 Header pin 9 */
+#ifndef CYBSP_J2_9
+#define CYBSP_J2_9                  (CYBSP_A4)
+#endif
+/** Cypress J2 Header pin 10 */
+#ifndef CYBSP_J2_10
+#define CYBSP_J2_10                 (P9_4)
+#endif
+/** Cypress J2 Header pin 11 */
+#ifndef CYBSP_J2_11
+#define CYBSP_J2_11                 (CYBSP_A5)
+#endif
+/** Cypress J2 Header pin 12 */
+#ifndef CYBSP_J2_12
+#define CYBSP_J2_12                 (P9_5)
+#endif
+/** Cypress J2 Header pin 13 */
+#ifndef CYBSP_J2_13
+#define CYBSP_J2_13                 (P10_6)
+#endif
+/** Cypress J2 Header pin 14 */
+#ifndef CYBSP_J2_14
+#define CYBSP_J2_14                 (NC)
+#endif
+/** Cypress J2 Header pin 15 */
+#ifndef CYBSP_J2_15
+#define CYBSP_J2_15                 (P6_2)
+#endif
+/** Cypress J2 Header pin 16 */
+#ifndef CYBSP_J2_16
+#define CYBSP_J2_16                 (P9_6)
+#endif
+/** Cypress J2 Header pin 17 */
+#ifndef CYBSP_J2_17
+#define CYBSP_J2_17                 (P6_3)
+#endif
+/** Cypress J2 Header pin 18 */
+#ifndef CYBSP_J2_18
+#define CYBSP_J2_18                 (P9_7)
+#endif
+/** Cypress J2 Header pin 19 */
+#ifndef CYBSP_J2_19
+#define CYBSP_J2_19                 (P13_6)
+#endif
+/** Cypress J2 Header pin 20 */
+#ifndef CYBSP_J2_20
+#define CYBSP_J2_20                 (P13_7)
+#endif
+
 #endif /* defined(CY_USING_HAL) */
 
 #if defined(__cplusplus)

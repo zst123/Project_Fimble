@@ -4,11 +4,13 @@
 * Description:
 * Simple wrapper header containing all generated files.
 * This file was automatically generated and should not be modified.
-* cfg-backend-cli: 1.2.0.1478
-* Device Support Library (../../../../output/psoc6/psoc6pdl): 1.4.0.1571
+* Tools Package 2.1.0.1266
+* psoc6pdl 1.3.1.1499
+* personalities 1.0.0.0
+* udd 1.1.2.62
 *
 ********************************************************************************
-* Copyright 2017-2019 Cypress Semiconductor Corporation
+* Copyright 2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
