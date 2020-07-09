@@ -18,6 +18,7 @@
 
 /* MQTT include. */
 #include "iot_mqtt.h"
+#include "app_mqtt.h"
 
 /* AWS library includes. */
 #include "iot_system_init.h"

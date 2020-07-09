@@ -6,6 +6,7 @@ uint16_t CapSense_TouchSlider;
 
 void APP_MainLoop(void);
 
+
 /**
  * @brief My application entry function, called by the demo runner.
  *
@@ -26,7 +27,7 @@ int RunMyApplication( bool awsIotMqttMode,
                  void * pNetworkCredentialInfo,
                  const IotNetworkInterface_t * pNetworkInterface )
 {
-	vLoggingPrintf("Started RunMyApplication();");
+	vLoggingPrintf("Started RunMyApplication();\r\n");
 
 	/* Initialize LEDs */
 	cyhal_gpio_init(CYBSP_USER_LED1, CYHAL_GPIO_DIR_OUTPUT,
@@ -40,10 +41,19 @@ int RunMyApplication( bool awsIotMqttMode,
 	cyhal_gpio_init(CYBSP_LED_RGB_BLUE, CYHAL_GPIO_DIR_OUTPUT,
 			CYHAL_GPIO_DRIVE_STRONG, CYBSP_LED_STATE_OFF);
 
+	/* Initialize push buttons */
+	cyhal_gpio_init(CYBSP_USER_BTN, CYHAL_GPIO_DIR_INPUT,
+			CYHAL_GPIO_DRIVE_PULLUP, CYBSP_BTN_OFF);
+
 	/* Start CapSense touch as a separate task */
     xTaskCreate(CapSense_Task, "CapSense Task",
     		CapSense_TASK_TOUCH_STACK_SIZE, NULL,
 			CapSense_TASK_TOUCH_PRIORITY, NULL);
+
+	/* Start APP_TryMqtt touch as a separate task */
+	xTaskCreate(Mqtt_Task, "MQTT Task",
+			MQTT_TASK_TOUCH_STACK_SIZE, NULL,
+			MQTT_TASK_TOUCH_PRIORITY, NULL);
 
     /* Start main loop in this task */
 	APP_MainLoop();
@@ -74,6 +84,19 @@ void APP_MainLoop() {
     GUI_SetFont(GUI_FONT_20B_1);
     GUI_DispStringAt(buffer,  8, 88);
 
+    uint8_t ucTempMac[6] = { 0 };
+    WIFI_GetMAC( ucTempMac );
+    char MacAddress[22];
+    snprintf(MacAddress, 22, "%d:%d:%d:%d:%d:%d",
+    		ucTempMac[0], ucTempMac[1], ucTempMac[2],
+			ucTempMac[3], ucTempMac[4], ucTempMac[5]);
+
+    snprintf(buffer, 100, "MAC: %s", MacAddress);
+
+    GUI_SetFont(GUI_FONT_20B_1);
+    GUI_DispStringAt(buffer,  8, 116);
+
+
     while (1) {
     	if (CapSense_TouchData == SLIDER_TOUCHED) {
     		snprintf(buffer, 100, "Touch: Slider %03d    ", CapSense_TouchSlider);
@@ -84,10 +107,29 @@ void APP_MainLoop() {
     	} else {
     		snprintf(buffer, 100, "Touch: None           ");
     	}
-    	GUI_DispStringAt(buffer,  8, 120);
+    	GUI_DispStringAt(buffer,  8, 144);
 
     	vTaskDelay(100);
     	cyhal_gpio_toggle(CYBSP_USER_LED5);
+
+    	// Test MQTT using push button
+    	if (cyhal_gpio_read(CYBSP_USER_BTN) == CYBSP_BTN_PRESSED) {
+    		while (cyhal_gpio_read(CYBSP_USER_BTN) == CYBSP_BTN_PRESSED);
+
+    		char * _data = MacAddress;
+    		char * _device = MacAddress;
+    		char * _dir = "1";
+    		char _payload[MQTT_PAYLOAD_MAX_LENGTH];
+    		snprintf(_payload, MQTT_PAYLOAD_MAX_LENGTH,
+    				"{"
+    				"\"data\":\"%s\","
+    				"\"device\":\"%s\","
+    				"\"direction\":\"%s\""
+    				"}",
+					_data, _device, _dir);
+
+    		Mqtt_SendPayload(_payload);
+    	}
     }
 }
 
