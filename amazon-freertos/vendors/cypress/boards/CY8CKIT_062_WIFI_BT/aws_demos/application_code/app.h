@@ -45,13 +45,13 @@
 /********************* MyApplication ******************************/
 
 /* GUI colors and logos */
-#define APP_HEX_BG      (0x00cccccc)
+#define APP_HEX_BG      (0x00ffffff)
 #define APP_HEX_FG      (GUI_BLACK)
 #define APP_HEX_LOGO    (0x00141A46)
 
 #define APP_COLOR_BG    GUI_MAKE_COLOR(APP_HEX_BG)
 #define APP_COLOR_FG    GUI_MAKE_COLOR(APP_HEX_FG)
-#include "cypress_logo.h"
+#include "splash_screen_bitmap.h"
 
 /* Declaration of demo function. */
 int RunMyApplication( bool awsIotMqttMode,

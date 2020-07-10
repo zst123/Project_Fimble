@@ -62,52 +62,103 @@ int RunMyApplication( bool awsIotMqttMode,
 }
 
 void APP_MainLoop() {
-
-	GUI_Init();
+    // Initialise TFT display
+    GUI_Init();
     GUI_SetColor(APP_COLOR_FG);
     GUI_SetBkColor(APP_COLOR_BG);
     GUI_Clear();
 
-    GUI_DrawBitmap(&bmCypress_Logo_1_BPP_Inv, 8, 8);
-
-
-    GUI_SetFont(GUI_FONT_32B_1);
-    GUI_DispStringAt("Hello World", 8, 52);
-
-
-    char buffer[100];
+    // Retrieve IP address
     uint8_t ucTempIp[4] = { 0 };
     WIFI_GetIP( ucTempIp );
-    snprintf(buffer, 100, "IP Address: %d.%d.%d.%d",
-    		ucTempIp[0], ucTempIp[1], ucTempIp[2], ucTempIp[3]);
 
-    GUI_SetFont(GUI_FONT_20B_1);
-    GUI_DispStringAt(buffer,  8, 88);
-
+    // Retrieve MAC address
     uint8_t ucTempMac[6] = { 0 };
     WIFI_GetMAC( ucTempMac );
     char MacAddress[22];
     snprintf(MacAddress, 22, "%d:%d:%d:%d:%d:%d",
-    		ucTempMac[0], ucTempMac[1], ucTempMac[2],
-			ucTempMac[3], ucTempMac[4], ucTempMac[5]);
+             ucTempMac[0], ucTempMac[1], ucTempMac[2],
+             ucTempMac[3], ucTempMac[4], ucTempMac[5]);
 
-    snprintf(buffer, 100, "MAC: %s", MacAddress);
-
-    GUI_SetFont(GUI_FONT_20B_1);
-    GUI_DispStringAt(buffer,  8, 116);
-
+    // Screen switcher values
+    const uint8_t noOfScreens = 3;
+    uint8_t screenIndex = 0;
+    bool screenChanged = true;
 
     while (1) {
-    	if (CapSense_TouchData == SLIDER_TOUCHED) {
-    		snprintf(buffer, 100, "Touch: Slider %03d    ", CapSense_TouchSlider);
-    	} else if (CapSense_TouchData == BUTTON0_TOUCHED) {
-    		snprintf(buffer, 100, "Touch: Button 0       ");
-    	} else if (CapSense_TouchData == BUTTON1_TOUCHED) {
-    		snprintf(buffer, 100, "Touch: Button 1       ");
-    	} else {
-    		snprintf(buffer, 100, "Touch: None           ");
-    	}
-    	GUI_DispStringAt(buffer,  8, 144);
+        // Use slider to change screens
+        if (CapSense_TouchData == SLIDER_TOUCHED) {
+            // Calculate screen number from touch slider position
+            uint8_t newScreenIndex = noOfScreens * CapSense_TouchSlider / CapSense_TOUCH_SLIDER_MAX;
+
+            // Correct the index if out of bounds
+            if (newScreenIndex < 0) {
+                newScreenIndex = 0;
+            } else if (newScreenIndex >= noOfScreens) {
+                newScreenIndex = noOfScreens - 1;
+            }
+
+            // Indicate we need to change screens
+            if (newScreenIndex != screenIndex) {
+                screenIndex = newScreenIndex;
+                screenChanged = true;
+            }
+        }
+
+        // Change screen if necessary (static screens)
+        if (screenChanged) {
+            screenChanged = false;
+
+            if (screenIndex == 0) {
+                // Splash Screen
+                GUI_Clear();
+                GUI_DrawBitmap(&PSoC_Splash_Screen, 0, 0);
+            } else if (screenIndex == 1) {
+
+            } else if (screenIndex == 2) {
+                // Debug Screen
+                GUI_Clear();
+
+                GUI_SetFont(GUI_FONT_32B_1);
+                GUI_DispStringAt("Hello World", 8, 8);
+
+                // Local IP Address
+                char buffer[50];
+                snprintf(buffer, 50, "IP Address: %d.%d.%d.%d",
+                         ucTempIp[0], ucTempIp[1], ucTempIp[2], ucTempIp[3]);
+                GUI_SetFont(GUI_FONT_20B_1);
+                GUI_DispStringAt(buffer,  8, 44);
+
+                // Device MAC address
+                snprintf(buffer, 50, "MAC: %s", MacAddress);
+                GUI_SetFont(GUI_FONT_20B_1);
+                GUI_DispStringAt(buffer,  8, 72);
+            }
+
+        }
+
+        // Update screen if necessary (continuously updating screens)
+
+        if (screenIndex == 0) {
+            // Splash Screen
+        } else if (screenIndex == 1) {
+
+        } else if (screenIndex == 2) {
+            // Debug Screen
+
+            // CapSense debugging values
+            char buffer[50];
+            if (CapSense_TouchData == SLIDER_TOUCHED) {
+                snprintf(buffer, 50, "Touch: Slider %03d    ", CapSense_TouchSlider);
+            } else if (CapSense_TouchData == BUTTON0_TOUCHED) {
+                snprintf(buffer, 50, "Touch: Button 0       ");
+            } else if (CapSense_TouchData == BUTTON1_TOUCHED) {
+                snprintf(buffer, 50, "Touch: Button 1       ");
+            } else {
+                snprintf(buffer, 50, "Touch: None           ");
+            }
+            GUI_DispStringAt(buffer,  8, 100);
+        }
 
     	vTaskDelay(100);
     	cyhal_gpio_toggle(CYBSP_USER_LED5);
