@@ -10,7 +10,7 @@ Here are some GIFs.
 
 | Preview of each page | Food Nutritional Details | Inventory Statistics |
 | --- | --- | --- |
-| ![](./screenshots/Video-2.gif) | ![](./screenshots/Video-3.gif) | ![](./screenshots/Video-2.gif) | 
+| ![](./screenshots/Video-1.gif) | ![](./screenshots/Video-3.gif) | ![](./screenshots/Video-2.gif) | 
 
 ### Inventory Page
 
