@@ -4,6 +4,17 @@ This is a Flutter app for Project Fimble. It is a concept implementation of smar
 
 ![](./screenshots/Test.png)
 
+# Usage
+
+Android App
+
+- Import and build the project with Android Studio
+
+Web App
+
+	$ flutter build web
+	$ flutter run -d web-server --release
+
 # Screenshots
 
 Here are some GIFs.

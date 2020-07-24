@@ -109,7 +109,7 @@ class _InventoryListPageState extends State<InventoryListPage> {
                 child: Text(_item.description,
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.black),
-                    overflow: TextOverflow.fade,
+                    overflow: TextOverflow.ellipsis,
                     maxLines: 3,
                     softWrap: true,
                 ),
