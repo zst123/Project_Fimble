@@ -25,7 +25,7 @@ To import into ModusToolbox IDE:
 1. Choose the demo project for CY8CKIT_062_WIFI_BT: **
   - `Project_Fimble/amazon-freertos/projects/cypress/CY8CKIT_062_WIFI_BT/mtb/aws_demos`
 
-## Android App
+## Flutter App (Android/Web)
 
 Under the folder [*flutter_fimble*](./flutter_fimble).
 
