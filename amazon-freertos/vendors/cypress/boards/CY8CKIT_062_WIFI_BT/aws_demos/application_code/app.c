@@ -135,6 +135,7 @@ void APP_MainLoop() {
 				GUI_SetFont(GUI_FONT_32B_1);
 				GUI_DispStringAt("Inventory Scan", 8, 8);
 				GUI_DrawBitmap(&RfidIdle, 0, 240/2 - 88/2);
+				GUI_DrawBitmap(&PSoC_Splash_Screen, 0, -178);
 
             } else if (screenIndex == 2) {
                 // Debug Screen
