@@ -20,6 +20,9 @@
 #include "iot_mqtt.h"
 #include "app_mqtt.h"
 
+/* RFID include. */
+#include "mfrc522.h"
+
 /* AWS library includes. */
 #include "iot_system_init.h"
 #include "iot_logging_task.h"
@@ -52,6 +55,10 @@
 #define APP_COLOR_BG    GUI_MAKE_COLOR(APP_HEX_BG)
 #define APP_COLOR_FG    GUI_MAKE_COLOR(APP_HEX_FG)
 #include "splash_screen_bitmap.h"
+#include "rfid_idle_bitmap.h"
+#include "rfid_success_bitmap.h"
+#include "rfid_updatein_bitmap.h"
+#include "rfid_updateout_bitmap.h"
 
 /* Declaration of demo function. */
 int RunMyApplication( bool awsIotMqttMode,
@@ -86,3 +93,14 @@ extern uint16_t CapSense_TouchSlider;
 /* CapSense functions */
 static void CapSense_Interrupt(void);
 void CapSense_Task(void *pvParameters);
+
+
+/********************* RFID ******************************/
+
+#define Rfid_TASK_TOUCH_STACK_SIZE       (configMINIMAL_STACK_SIZE * 2)
+#define Rfid_TASK_TOUCH_PRIORITY         (9u)
+void Rfid_Task(void *pvParameters);
+
+extern uint8_t Rfid_VersionReg;
+extern char Rfid_CardUid[20];
+extern bool Rfid_CardPresent;
