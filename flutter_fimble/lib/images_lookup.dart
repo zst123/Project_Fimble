@@ -7,6 +7,23 @@ class InventoryImages {
       'Image URL'
     ],
     */
+    '90-C0-CA-73': [
+      'Avocado',
+      'Avocado is the fruit of the avocado tree, scientifically known as Persea americana.'
+          'This fruit is prized for its high nutrient value and is added to various dishes due '
+          'to its good flavor and rich texture. It is the main ingredient in guacamole. '
+          'These days, the avocado has become an incredibly popular food among health-conscious '
+          'individuals. It’s often referred to as a superfood, which is not surprising given its health properties.',
+      'https://36iusc2tb88y2g492si2bqd1-wpengine.netdna-ssl.com/wp-content/uploads/2019/07/avocados.jpg',
+    ],
+    '95-61-56-D3': [
+      'Green Tea',
+      'Green tea is a type of tea that is made from Camellia sinensis leaves and buds that have not '
+          'undergone the same withering and oxidation process used to make oolong teas and black teas. '
+          'Green tea originated in China, but its production and manufacture has spread to other '
+          'countries in East Asia.',
+      'https://i.ndtvimg.com/i/2015-05/green-tea_625x350_61431767171.jpg',
+    ],
     '160:201:160:70:128:15': [
       'Test Item (PSoC)',
       'This is a test from the Cypress PSoC6 board',
@@ -43,6 +60,11 @@ class InventoryImages {
           'Salads are typically served at room temperature or chilled, with notable exceptions such '
           'as south German potato salad which can be served warm.',
       'https://www.aspicyperspective.com/wp-content/uploads/2018/05/brazilian-chopped-salad-10-256x256.jpg',
+    ],
+    'unknown': [
+      'Unknown',
+      '?',
+      'https://i.dlpng.com/static/png/6853361_preview.png'
     ]
 
   };

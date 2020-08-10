@@ -19,13 +19,24 @@ class InventoryItem {
 
   InventoryItem({this.data_id, this.timestamp, this.device_id}) {
     // Lookup data & device
-    name = InventoryImages.dataMap[data_id][0];
-    description = InventoryImages.dataMap[data_id][1];
-    //device_name = InventoryImages.deviceMap[device_id];
-    icon = Image.network(
-      InventoryImages.dataMap[data_id][2],
+    if (InventoryImages.dataMap.containsKey(data_id)) {
+      name = InventoryImages.dataMap[data_id][0];
+      description = InventoryImages.dataMap[data_id][1];
+      //device_name = InventoryImages.deviceMap[device_id];
+      icon = Image.network(
+        InventoryImages.dataMap[data_id][2],
         fit: BoxFit.cover,
-    );
+      );
+    } else {
+      name = InventoryImages.dataMap['unknown'][0];
+      description = "Unknown item: $data_id";
+      //device_name = InventoryImages.deviceMap[device_id];
+      icon = Image.network(
+        InventoryImages.dataMap['unknown'][2],
+        fit: BoxFit.cover,
+      );
+
+    }
 
     // Human readable time
     readable_time = formatTime(timestamp);
